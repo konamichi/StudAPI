@@ -1,7 +1,6 @@
-﻿using System;
-namespace temp.Data
+﻿namespace temp.Data
 {
-	public class HumanModel
+    public class HumanModel
 	{
 		public string FullName { get; set; }
 

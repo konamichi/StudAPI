@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace temp.Data
 {
-	[Table("human")]
+    [Table("human")]
 	public class Human
 	{
 		[Key]

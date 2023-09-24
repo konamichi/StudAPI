@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading;
-using temp.Data;
+﻿using temp.Data;
+using temp.Models;
 
 namespace temp.Repositories
 {
-	public class MyRepository
+    public class MyRepository
 	{
 		private readonly DataContext _dataContext;
 
@@ -50,11 +49,29 @@ namespace temp.Repositories
 			return _dataContext.Students.FirstOrDefault(s => s.StudNumber == studNumber);
 		}
 
-		public async Task DeleteStudentAsync(Student student, CancellationToken cancellationToken)
+		public async Task DeleteStudentAsync(StudentModel student, CancellationToken cancellationToken)
 		{
-			_dataContext.Students.Remove(student);
+			_dataContext.Students.Remove(new Student
+			{
+				StudNumber = student.StudNumber,
+				FullName = student.FullName,
+				Birth = student.Birth,
+				Scholarship = student.Scholarship,
+				Sex = student.Sex
+			});
+
             await _dataContext.SaveChangesAsync(cancellationToken);
         }
+
+		public async Task ChangeStudentAsync(Student existStudent, StudentModel student, CancellationToken cancellationToken)
+		{
+			existStudent.StudNumber = student.StudNumber;
+			existStudent.Birth = student.Birth;
+			existStudent.Scholarship = student.Scholarship;
+			existStudent.Sex = student.Sex;
+
+			await _dataContext.SaveChangesAsync(cancellationToken);
+		}
 	}
 }
 

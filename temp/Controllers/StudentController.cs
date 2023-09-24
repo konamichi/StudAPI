@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using temp.Data;
+using temp.Models;
 using temp.Services;
 
 namespace temp.Controllers
@@ -44,6 +44,21 @@ namespace temp.Controllers
 			}
 			catch (Exception ex)
 			{
+				return BadRequest(ex.Message);
+			}
+
+		}
+
+		[HttpPut]
+		[Route("change")]
+		public async Task<IActionResult> Changes([FromQuery] int studNumber, [FromBody] StudentModel student, CancellationToken cancellationToken)
+		{
+			try
+			{
+				return Ok(await _myService.ChangeStudentAsync(studNumber, student, cancellationToken));
+			}
+			catch (Exception ex)
+            {
 				return BadRequest(ex.Message);
 			}
 		}

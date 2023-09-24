@@ -1,10 +1,8 @@
-﻿using System;
-using System.Numerics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace temp.Data
 {
-	public class DataContext : DbContext
+    public class DataContext : DbContext
     {
         private readonly IConfiguration _config;
 

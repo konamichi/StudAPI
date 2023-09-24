@@ -1,8 +1,7 @@
-﻿using System;
-namespace temp.Models
+﻿namespace temp.Data
 {
-	public class StudentModel
-	{
+    public class StudentMessageModel
+    {
         public int StudNumber { get; set; }
 
         public string FullName { get; set; }
@@ -12,6 +11,7 @@ namespace temp.Models
         public bool Sex { get; set; }
 
         public int? Scholarship { get; set; }
+
+        public string? Message { get; set; } 
     }
 }
-
