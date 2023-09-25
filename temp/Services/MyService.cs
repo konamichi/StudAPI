@@ -74,7 +74,7 @@ namespace temp.Services
 		public async Task<StudentMessageModel> ChangeStudentAsync(int studNumber, StudentModel student, CancellationToken cancellationToken)
 		{
 			if (studNumber < 100000 || studNumber > 999999)
-				throw new Exception("Некорретно введен студенческий номер");
+				throw new Exception("Некорректно введен студенческий номер");
 
 			if (student == null)
 				throw new Exception("Студент не может быть null");
