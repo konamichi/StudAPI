@@ -1,7 +1,7 @@
-﻿using temp.Data;
-using temp.Models;
+﻿using StudAPI.Data;
+using StudAPI.Models;
 
-namespace temp.Repositories
+namespace StudAPI.Repositories
 {
     public class MyRepository
 	{
@@ -71,6 +71,40 @@ namespace temp.Repositories
 			existStudent.Sex = student.Sex;
 
 			await _dataContext.SaveChangesAsync(cancellationToken);
+		}
+
+		public string? GetFirstEmptyGroup()
+		{
+			return _dataContext.Students
+				.GroupBy(student => student.Univgroup)
+				.Where(s => s.Count() < 25)
+				.Select(s => s.Key)
+				.FirstOrDefault();
+		}
+
+		public async Task<string> CreateGroupAsync(CancellationToken cancellationToken)
+		{
+			var random = new Random();
+			string groupName = null;
+
+			do
+			{
+				groupName = $"ИДБ-{random.Next(10, 21)}-{random.Next(random.Next(1, 10))}";
+			}
+			while (!CheckExistingGroup(groupName));
+
+			await _dataContext.Groups.AddAsync(new Group
+			{
+				Gr_name = groupName
+			});
+			await _dataContext.SaveChangesAsync(cancellationToken);
+
+			return groupName;
+		}
+
+		private bool CheckExistingGroup(string groupName)
+		{
+			return _dataContext.Groups.FirstOrDefault(g => g.Gr_name == groupName) == null ? false : true;
 		}
 	}
 }

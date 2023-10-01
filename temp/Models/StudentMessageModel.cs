@@ -1,4 +1,4 @@
-﻿namespace temp.Data
+﻿namespace StudAPI.Data
 {
     public class StudentMessageModel
     {
@@ -11,6 +11,8 @@
         public bool Sex { get; set; }
 
         public int? Scholarship { get; set; }
+
+        public string Univgroup { get; set; }
 
         public string? Message { get; set; } 
     }

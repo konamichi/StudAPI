@@ -1,7 +1,6 @@
-﻿using System;
-namespace temp.Models
+﻿namespace StudAPI.Models
 {
-	public class StudentModel
+    public class StudentModel
 	{
         public int StudNumber { get; set; }
 
@@ -12,6 +11,8 @@ namespace temp.Models
         public bool Sex { get; set; }
 
         public int? Scholarship { get; set; }
+
+        public string Univgroup { get; set; }
     }
 }
 

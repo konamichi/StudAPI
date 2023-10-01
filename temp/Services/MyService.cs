@@ -1,8 +1,8 @@
-﻿using temp.Data;
-using temp.Models;
-using temp.Repositories;
+﻿using StudAPI.Data;
+using StudAPI.Models;
+using StudAPI.Repositories;
 
-namespace temp.Services
+namespace StudAPI.Services
 {
     public class MyService
 	{
@@ -23,7 +23,7 @@ namespace temp.Services
 			if (examMark < 0)
 				throw new Exception("Неверный ввод");
 
-			var random = new Random(); 
+			var random = new Random();
 
             var createdStudent = await _myRepository.CreateStudentAsync(new StudentModel
             {
@@ -31,7 +31,8 @@ namespace temp.Services
                 Birth = human.Birth,
                 Sex = human.Sex,
                 StudNumber = random.Next(100000, 200000),
-                Scholarship = examMark > 200 ? 2000 : null
+                Scholarship = examMark > 200 ? 2000 : null,
+				Univgroup = await GetGroupAsync(cancellationToken)
             }, cancellationToken);
 
 			return new StudentMessageModel
@@ -40,7 +41,8 @@ namespace temp.Services
 				Birth = createdStudent.Birth,
 				Scholarship = createdStudent.Scholarship,
 				StudNumber = createdStudent.StudNumber,
-				Sex = createdStudent.Sex
+				Sex = createdStudent.Sex,
+				Univgroup = createdStudent.Univgroup
 			};
 		}
 
@@ -62,7 +64,8 @@ namespace temp.Services
                     Birth = student.Birth,
                     Sex = student.Sex,
                     StudNumber = student.StudNumber,
-                    Scholarship = student.Scholarship
+                    Scholarship = student.Scholarship,
+					Univgroup = student.Univgroup
                 }, cancellationToken);
 
 				return "Поздравляем с отчислением!<3";
@@ -93,8 +96,21 @@ namespace temp.Services
 				Birth = student.Birth,
 				Sex = student.Sex,
 				Scholarship = student.Scholarship,
-				StudNumber = student.StudNumber
+				StudNumber = student.StudNumber,
+				Univgroup = student.Univgroup
 			};
+		}
+
+		private async Task<string> GetGroupAsync(CancellationToken cancellationToken)
+		{
+			string groupName = null;
+
+            if (_myRepository.GetFirstEmptyGroup() == null)
+			{
+				groupName = await _myRepository.CreateGroupAsync(cancellationToken);
+			}
+
+			return groupName!;
 		}
 	}
 }

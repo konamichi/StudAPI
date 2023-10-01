@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace temp.Data
+namespace StudAPI.Data
 {
     public class DataContext : DbContext
     {
@@ -15,6 +15,8 @@ namespace temp.Data
         public DbSet<Human> People { get; set; }
 
         public DbSet<Student> Students { get; set; }
+
+        public DbSet<Group> Groups { get; set; } 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

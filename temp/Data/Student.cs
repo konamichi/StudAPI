@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace temp.Data
+namespace StudAPI.Data
 {
     [Table("student")]
     public class Student
@@ -21,5 +21,8 @@ namespace temp.Data
 
         [Column("scholarship")]
         public int? Scholarship { get; set; }
+
+        [Column("univgroup")]
+        public string Univgroup { get; set; }
     }
 }
