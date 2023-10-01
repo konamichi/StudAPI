@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using temp.Data;
-using temp.Models;
-using temp.Services;
+using StudAPI.Data;
+using StudAPI.Models;
+using StudAPI.Services;
 
 namespace temp.Controllers
 {
@@ -25,7 +25,7 @@ namespace temp.Controllers
 			CancellationToken cancellationToken)
 		{
 			try
-			{
+			{ 
 				return Ok(await _myService.BecomeStudentAsync(human, fiveXfive, yourExamMark, cancellationToken));
 			}
 			catch (Exception ex)

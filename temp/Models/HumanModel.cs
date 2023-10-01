@@ -1,4 +1,4 @@
-﻿namespace temp.Data
+﻿namespace StudAPI.Data
 {
     public class HumanModel
 	{

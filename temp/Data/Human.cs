@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace temp.Data
+namespace StudAPI.Data
 {
     [Table("human")]
 	public class Human
